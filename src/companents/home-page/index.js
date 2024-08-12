@@ -18,7 +18,7 @@ import "swiper/css/pagination";
 import "./home-page.css";
 import { FreeMode, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Rate } from "antd";
+import { Modal, Rate } from "antd";
 import { Footer } from "../footer";
 import { data } from "../data";
 import { useContext, useState } from "react";
@@ -28,6 +28,16 @@ export const HomePage = () => {
   const {category, setCategory, setId,id} = useContext(ApiContext);
   const filterData = data.filter((item) => item.category === category);
   const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   return (
     <>
       <Header />
@@ -58,6 +68,7 @@ export const HomePage = () => {
             </p>
           </div>
           <button
+          onClick={showModal}
             style={{ backgroundColor: "#B62D25" }}
             className="btn text-white"
           >
@@ -241,7 +252,7 @@ export const HomePage = () => {
                     <Rate disabled defaultValue={item?.rate} />
                     <button
                     onClick={()=> {
-                    navigate(`/about/:${item.id}`); setId(item.id)
+                    navigate(`/about/:${item.id}`); setId(item.id);
                     }}
                       style={{ backgroundColor: "#F7F7F7" }}
                       className="w-100 btn"
@@ -254,6 +265,22 @@ export const HomePage = () => {
             );
           })}
         </Swiper>
+      <Modal footer={null} width={400} title="Buyurtma berish" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <div className="text-center">
+        <p style={{fontSize:"24px"}}>Batafsil ma’lumot olish uchun
+        formani to’ldiring</p>
+        <p style={{fontSize:"16px"}}>Siz bilan menejerlarimiz tez orada bog’lanib,
+        savollaringizga javob berishadi</p>
+        </div>
+
+        <div>
+          <label>F.I.SH :</label>
+          <input className="form-control" placeholder="F.I.Sh:"/>
+          <label className="mt-4">Telefon raqam :</label>
+          <input className="form-control" placeholder="+998 -- --- -- --"/>
+          <button style={{backgroundColor:"#B62D25"}} className="btn text-white w-100 mt-4">Jo'natish</button>
+        </div>
+      </Modal>
 
         <div className="text-center">
           <button style={{ color: "#B62D25" }} className="btn ">
