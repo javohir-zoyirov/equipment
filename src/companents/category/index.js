@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from "react-router";
 import logo from "../image/Frame 48095450.png";
 import { PhoneOutlined } from "@ant-design/icons";
 export const Category = () => {
-    const {category,setCategory,catalog,setCatalog} = useContext(ApiContext);
+    const {category,setCategory,catalog,setCatalog,setId} = useContext(ApiContext);
   const filterData = data.filter((item) => item.category === catalog);
   const location = useLocation()
  const navigate = useNavigate();
@@ -139,6 +139,9 @@ export const Category = () => {
                     </p>
                     <Rate disabled defaultValue={item?.rate} />
                     <button
+                    onClick={()=> {
+                        navigate(`/about/:${item.id}`); setId(item.id)
+                        }}
                       style={{ backgroundColor: "#F7F7F7" }}
                       className="w-100 btn"
                     >
