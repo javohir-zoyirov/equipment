@@ -1,0 +1,15 @@
+.top:hover {
+   border-top: 3px solid #B62D25;
+}
+.bottom:hover {
+    border-bottom: 3px solid #B62D25;
+}
+ul li a:hover {
+    color: #B62D25;
+ }
+
+ .phone:hover {
+    border: 1px solid #B62D25;
+    border-radius: 20px;
+    padding: 5px;
+ }
